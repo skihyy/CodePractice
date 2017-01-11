@@ -1,4 +1,4 @@
-package com.yuyang.he.lc3;
+package com.yuyang.he.lc.string;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,11 +9,11 @@ import java.util.Map;
  * @version 1.0
  * @since 2016年12月22日
  */
-public class LC3
+public class LC3_LengthOfLongestSubstring
 {
     public static void main(String[] args)
     {
-        System.out.println(new LC3().lengthOfLongestSubstring("aabbbb"));
+        System.out.println(new LC3_LengthOfLongestSubstring().lengthOfLongestSubstring("aabbbb"));
     }
 
     /**

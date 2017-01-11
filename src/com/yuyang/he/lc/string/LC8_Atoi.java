@@ -1,4 +1,4 @@
-package com.yuyang.he.lc8;
+package com.yuyang.he.lc.string;
 
 /**
  * @author yuyanghe
@@ -6,11 +6,11 @@ package com.yuyang.he.lc8;
  * @version 1.0
  * @since 2016年12月22日
  */
-public class LC8
+public class LC8_Atoi
 {
     public static void main(String[] args)
     {
-        System.out.println(new LC8().myAtoi("-"));
+        System.out.println(new LC8_Atoi().myAtoi("-"));
     }
 
     /**

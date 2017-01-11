@@ -1,4 +1,4 @@
-package com.yuyang.he.lc273;
+package com.yuyang.he.lc.numbers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,11 +9,11 @@ import java.util.Map;
  * @version 1.0
  * @since 2017年1月11日
  */
-public class LC273
+public class LC273_NumToWords
 {
     Map<Integer, String> numMap = new HashMap<Integer, String>(), digMap = new HashMap<Integer, String>();
 
-    public LC273()
+    public LC273_NumToWords()
     {
         numMap.put(1, "One");
         numMap.put(2, "Two");
@@ -52,7 +52,7 @@ public class LC273
 
     public static void main(String[] args)
     {
-        System.out.println(new LC273().numToString(50868));
+        System.out.println(new LC273_NumToWords().numToString(50868));
     }
 
     public String numToString(int num)
