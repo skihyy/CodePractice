@@ -2,7 +2,12 @@ package com.yuyang.he.lc.subsetsAndCombinations;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author yuyanghe
+ * @date 2017年1月11日
+ * @version 1.0
+ * @since 2017年1月11日
+ */
 public class LC17_LetterCombinations
 {
     public static void main(String[] args)
