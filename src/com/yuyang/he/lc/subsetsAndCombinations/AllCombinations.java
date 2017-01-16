@@ -37,9 +37,8 @@ public class AllCombinations
     public List<List<Integer>> allCombinations(int[] nums)
     {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
-        res.add(new ArrayList<Integer>()); // limit = 0
 
-        for (int i = 1; i <= nums.length; i++)
+        for (int i = 0; i <= nums.length; i++)
         {
             helper(nums, i, new ArrayList<Integer>(), new ArrayList<Integer>(), res);
         }
@@ -51,18 +50,20 @@ public class AllCombinations
     {
         if (0 == limit)
         {
-            res.add(curList);
+            res.add(new ArrayList<Integer> (curList));
             return;
         }
 
         for (int i = 0; i < nums.length; i++)
         {
-            List<Integer> newExcList = new ArrayList<Integer>(excluded), newCurList = new ArrayList<Integer>(curList);
             if (!excluded.contains(nums[i]))
             {
-                newExcList.add(nums[i]);
-                newCurList.add(nums[i]);
-                helper(nums, limit - 1, newExcList, newCurList, res);
+                excluded.add(nums[i]);
+                curList.add(nums[i]);
+                helper(nums, limit - 1, excluded, curList, res);
+                curList.remove(curList.size() - 1);
+                excluded.remove(excluded.size() - 1);
+                
             }
         }
     }
