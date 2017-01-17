@@ -13,7 +13,8 @@ public class RoundRobin
 
     public float waitingTime(int[] requestTimes, int[] executionTimes, int interval)
     {
-        if (null == requestTimes || 0 == requestTimes.length || null == executionTimes || 0 == executionTimes.length)
+        if (null == requestTimes || 0 == requestTimes.length || null == executionTimes || 0 == executionTimes.length
+                || requestTimes.length != executionTimes.length)
         {
             return 0;
         }
@@ -27,49 +28,30 @@ public class RoundRobin
 
         // current work index
         int curIndex = 0, curTime = 0, waitingTime = 0;
-        boolean allFinished = true;
         while (true)
         {
             curIndex = (curIndex + 1) % requestTimes.length;
 
-            if (0 == workingTimes[curIndex])
+            if (checkForCompletion(workingTimes))
             {
-                allFinished = true;
-                for (int i = 0; i < workingTimes.length; i++)
-                {
-                    if (0 != workingTimes[i])
-                    {
-                        allFinished = false;
-                        break;
-                    }
-                }
-                if (allFinished)
-                {
-                    break;
-                }
-                else
-                {
-                    continue;
-                }
+                break;
             }
 
             // must has received the job in order to start
-            if (curTime >= requestTimes[curIndex])
+            if (curTime >= requestTimes[curIndex] && 0 < executionTimes[curIndex])
             {
                 if (0 <= workingTimes[curIndex] - interval)
                 {
                     curTime += interval;
-                    lastActiveEndTime[curIndex] = curTime;
-                    waitingTime += checkWaitingTime(requestTimes, workingTimes, lastActiveEndTime, curTime, curIndex);
                     workingTimes[curIndex] -= interval;
                 }
                 else
                 {
                     curTime += workingTimes[curIndex];
-                    lastActiveEndTime[curIndex] = curTime;
-                    waitingTime += checkWaitingTime(requestTimes, workingTimes, lastActiveEndTime, curTime, curIndex);
                     workingTimes[curIndex] = 0;
                 }
+                waitingTime += checkWaitingTime(requestTimes, workingTimes, lastActiveEndTime, curTime, curIndex);
+                lastActiveEndTime[curIndex] = curTime;
             }
         }
 
@@ -90,5 +72,17 @@ public class RoundRobin
             }
         }
         return waitingTime;
+    }
+    
+    private boolean checkForCompletion(int[] remainTimes)
+    {
+        for (int i = 0; i < remainTimes.length; i++)
+        {
+            if (0 != remainTimes[i])
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
