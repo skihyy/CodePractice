@@ -1,4 +1,4 @@
-package com.yuyang.he.lc.array;
+package com.yuyang.he.lc.arrayAndList;
 
 import java.util.Comparator;
 import java.util.HashMap;
