@@ -1,8 +1,5 @@
 package com.yuyang.he.vo;
 
-/**
- * @author: Yuyang He
- * /
 public class ListNode
 {
     public int val;
