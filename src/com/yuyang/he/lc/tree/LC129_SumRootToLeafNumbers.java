@@ -3,6 +3,8 @@ package com.yuyang.he.lc.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yuyang.he.vo.TreeNode;
+
 /**
  * @author yuyanghe
  * @date 2017年2月10日
@@ -45,16 +47,4 @@ public class LC129_SumRootToLeafNumbers
             helper(n, r.right, sb);
         sb.setLength(sb.length() - 1);
     }
-
-    static class TreeNode
-    {
-        TreeNode left, right;
-        int val;
-
-        TreeNode(int x)
-        {
-            val = x;
-        }
-    }
-
 }

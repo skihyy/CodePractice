@@ -3,6 +3,8 @@ package com.yuyang.he.lc.tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.yuyang.he.vo.TreeNode;
+
 /**
  * @author yuyanghe
  * @date 2017年1月19日
@@ -20,7 +22,7 @@ public class LC173_BinarySearchTreeIterator
         root.right = new TreeNode(10);
         root.right.right = new TreeNode(15);
         LC173_BinarySearchTreeIterator i = new LC173_BinarySearchTreeIterator(root);
-        while(i.hasNext())
+        while (i.hasNext())
         {
             System.out.println(i.next());
         }
@@ -61,16 +63,4 @@ public class LC173_BinarySearchTreeIterator
     {
         return queue.isEmpty() ? 0 : queue.poll();
     }
-
-    static class TreeNode
-    {
-        TreeNode left, right;
-        int val;
-
-        TreeNode(int x)
-        {
-            val = x;
-        }
-    }
-
 }
