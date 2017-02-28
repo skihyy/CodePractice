@@ -10,6 +10,22 @@ public class ListNode
         val = x;
     }
 
+    public ListNode(String s)
+    {
+        char[] cc = s.toCharArray();
+        ListNode tmp = this;
+        for (int i = 0; i < cc.length; i++)
+        {
+            if (0 == i)
+                val = cc[i] - '0';
+            else
+            {
+                tmp.next = new ListNode(cc[i] - '0');
+                tmp = tmp.next;
+            }
+        }
+    }
+
     public String toString()
     {
         ListNode tmp = this;
