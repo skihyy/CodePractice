@@ -1,4 +1,4 @@
-package com.yuyang.he.lc.DFS;
+package com.yuyang.he.lc.dfs;
 
 import java.util.ArrayList;
 import java.util.HashMap;

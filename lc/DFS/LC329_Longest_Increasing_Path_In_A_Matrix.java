@@ -1,4 +1,4 @@
-package com.yuyang.he.lc.DFS;
+package com.yuyang.he.lc.dfs;
 
 public class LC329_Longest_Increasing_Path_In_A_Matrix
 {
