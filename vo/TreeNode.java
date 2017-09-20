@@ -58,6 +58,6 @@ public class TreeNode
 
     public String toString()
     {
-        return new LC449_SerializeAndDeserializeBST().serialize(this);
+        return "[" + new LC449_SerializeAndDeserializeBST().serialize(this) + "]";
     }
 }

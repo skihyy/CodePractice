@@ -1,8 +1,5 @@
 package com.yuyang.he.lc.dfs;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 public class LC547_Friend_Circles
 {
 
