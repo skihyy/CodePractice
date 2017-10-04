@@ -1,10 +1,8 @@
 package com.yuyang.he.lc.numbers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class LC305_Number_Of_Islands_II
 {
@@ -18,46 +16,45 @@ public class LC305_Number_Of_Islands_II
     }
     
     public final List<Integer> numIslands2(final int m, final int n, final int[][] positions) {
-        // stores how many islands now exist
-        // and the cooridnations of each of the islands
-        // island ID# -> all coordinations
-        final Map<Integer, List<int []>> islands = new HashMap<> ();
-        // stores the index of islands which becomes connected after a new operation
-        final List<Integer> connections = new ArrayList<> (), result = new ArrayList<> ();
-        int currentMaxIslandID = 0;
-        for(int i = 0; i < positions.length; i++) {
-            connections.clear();
-            final Set<Integer> islandIDs = islands.keySet();
-            for(int id : islandIDs) {
-                final List<int []> island = islands.get(id);
-                if(contains(island, positions[i][0], positions[i][1]))
-                    connections.add(id);
-            }
-            final int connectedIslandSize = connections.size();
-            if(0 == connectedIslandSize){ // new island!
-                islands.putIfAbsent(currentMaxIslandID, new ArrayList<> ());
-                islands.get(currentMaxIslandID++).add(new int[] {positions[i][0], positions[i][1]});
-            } else if(1 == connectedIslandSize)
-                islands.get(connections.get(0)).add(new int[] {positions[i][0], positions[i][1]});
-            else if(1 < connectedIslandSize) {
-                final List<int []> newIsland = islands.get(connections.get(0));
-                newIsland.add(new int[] {positions[i][0], positions[i][1]});
-                for(int j = 1; j < connectedIslandSize; j++) {
-                    final int islandID = connections.get(j);
-                    newIsland.addAll(islands.get(islandID));
-                    islands.remove(islandID);
+        final List<Integer> list = new ArrayList<> ();
+        if(0 >= m || 0 >= n)
+            return list;
+        
+        final int [][] directions = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        // id of tree will be the id of an island
+        // island with same id meaning they are one island
+        final int [] tree = new int[m * n]; // for union find
+        Arrays.fill(tree, -1);
+        int count = 0;
+        for(final int [] position : positions) {
+            // at beginning, the location is the same as the ID
+            int newIslandID = position[0] * n + position[1];
+            tree[newIslandID] = newIslandID;
+            count++;
+            // check surroundings
+            for(final int [] direction : directions) {
+                final int i = position[0] + direction[0], j = position[1] + direction[1], neighborLocation = i * n + j;
+                // neighbor must be a island to check connections
+                if(0 <= i && m > i && 0 <= j && n > j && -1 != tree[neighborLocation]) {
+                    final int neighborID = finaNeighborID(tree, neighborLocation);
+                    if(newIslandID != neighborID) { // belongs to another island
+                        count--;
+                        tree[newIslandID] = neighborID;
+                        newIslandID = neighborID;
+                    }
                 }
             }
-            result.add(islands.size());
+            list.add(count);
         }
-        return result;
+        return list;
     }
     
-    private boolean contains(final List<int []> island, final int y, final int x) {
-        for(final int [] coor : island)
-            if((coor[0] == y && 1 == Math.abs(coor[1] - x)) || (coor[1] == x && 1 == Math.abs(coor[0] - y)))
-                return true;
-        return false;
+    private int finaNeighborID(final int [] array, int location) {
+        // the ID should be the same as the location (root node)
+        // if not, go up and check its parent until the root is found
+        while(location != array[location])
+            location = array[location];
+        return location;
     }
 
 }
